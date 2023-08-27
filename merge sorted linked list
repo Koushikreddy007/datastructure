@@ -1,0 +1,70 @@
+// Online C++ compiler to run C++ program online
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* next;
+};
+void insert(struct node** head,int x){
+    struct node* p=(struct node*)malloc(sizeof(struct node));
+    p->data=x;
+    p->next=NULL;
+    if(*head == NULL){
+        *head=p;
+    }
+    else{
+        struct node* current= *head;
+        while(current->next != NULL){
+            current=current->next;
+        }
+        current->next=p;
+    }
+}
+void print(node *head){
+    struct node* current=head;
+    while(current != NULL){
+        printf("%d ",current->data);
+        current=current->next;
+    }
+}
+struct node* merge(struct node* list1,struct node* list2){
+    if(list1==NULL){
+        return list2;
+    }
+    if(list2==NULL){
+        return list1;
+    }
+    struct node* result=NULL;
+    if(list1->data<=list2->data){
+        result=list1;
+        result->next=merge(list1->next,list2);
+    }
+    else{
+        result=list2;
+        result->next=merge(list1,list2->next);
+    }
+    return result;
+}
+int main(){
+    struct node* list1 = NULL;
+    insert(&list1, 1);
+    insert(&list1, 3);
+    insert(&list1, 5);
+
+    struct node* list2 = NULL;
+    insert(&list2, 2);
+    insert(&list2, 4);
+    insert(&list2, 6);
+
+    printf("List 1: ");
+    print(list1);
+
+    printf("List 2: ");
+    print(list2);
+
+    struct node* mergel= merge(list1, list2);
+    printf("Merged List: ");
+    print(mergel);
+
+    return 0;
+}
