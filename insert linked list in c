@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+void insert(struct node** head,int x){
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=x;
+    newnode->next=*head;
+    *head=newnode;
+}
+void print(struct node* n){
+    while(n != NULL){
+        printf("%d ",n->data);
+        n=n->next;
+    }
+}
+int main() {
+   struct node* head=NULL;
+   insert(&head,5);
+    insert(&head,7);
+     insert(&head,6);
+     
+   print(head);
+    return 0;
+}
