@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include<srdlib.h>
+#include<ctype.h>
+char p[50];
+float s[50];
+int t=-1;
+void push(float c){
+    t++;
+    s[t]=c;
+}
+float pop(){
+    float x;
+    x=s[t];
+    t--;
+    return x;
+}
+int main() {
+    float v1,v2;
+    int i;
+    printf("enter postfix ");
+    scanf("%s",&p);
+    for(int i=0;s[i]!=0;i++)
+    return 0;
+}
