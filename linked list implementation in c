@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node* next;
+};
+struct node* start=NULL;
+void del(struct node** head,int value)
+{
+      struct node* current = *head;
+    struct node* previous = NULL;
+while (current != NULL && current->data != value) {
+        previous = current;
+        current = current->next;
+    }
+if (current == NULL) {
+        printf("Element not found in the list.\n");
+        return;
+    }
+    if (previous == NULL) {
+        *head = current->next;
+    } else {
+        previous->next = current->next;
+    }
+    free(current);
+}
+void insert(struct node** head,int data){
+	struct node* p=(struct node*)malloc(sizeof(struct node));
+	p->data=data;
+	p->next=NULL;
+	if(*head == NULL){
+		*head=p;
+	}
+	else{
+		struct node* current= *head;
+		while(current->next!=NULL){
+			current=current->next;
+		}
+		current->next=p;
+	}
+}
+void print(struct node* head){
+	struct node* current=head;
+	printf("list contains: ");
+	while(current != NULL){
+		printf("%d ",current->data);
+		current=current->next;
+	}
+}
+int main(){
+    struct node* head=NULL;
+    int value,c;
+    
+    while(1){
+        printf("enter the type of operation:\n");
+        printf("display->1 insert->2 delete->3 exit->4\n");
+        scanf("%d",&c);
+
+        switch(c){
+            case 1:
+                print(head);
+                break;
+            case 2:
+                printf("Enter the value to insert: ");
+                scanf("%d", &value);
+                insert(&head, value);
+                break;
+            case 3:
+                printf("Enter the value to delete: ");
+                scanf("%d", &value);
+                del(&head, value);
+                break;
+            case 4:
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
