@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+struct node* create(int data){
+    struct node* p=(struct node*)malloc(sizeof(struct node));
+    p->data=data;
+    p->left=NULL;
+    p->right=NULL;
+    return p;
+}
+struct node* insert(struct node* root,int data){
+    if(root==NULL){
+        return create(data);
+    }
+    if(data<root->data){
+        root->left=insert(root->left,data);
+    }
+    else{
+        root->right=insert(root->right,data);
+    }
+    return root;
+}
+void inorder(struct node* root){
+    if(root != NULL){
+      inorder(root->left);
+      printf("%d ",root->data);
+      inorder(root->right);
+    }
+}
+int main(){
+    int n,data;
+     struct node* root = NULL;
+     root=insert(root,data);
+    while(1){
+        printf("\nEnter thr type of operation\n");
+        printf("insert->1 inorder->2 exit->3:");
+        scanf("%d",&n);
+        switch(n){
+            case 1:
+            printf("Enter the data:");
+            scanf("%d",&data);
+            insert(root,data);
+            break;
+            case 2:
+            inorder(root);
+            break;
+            case 3:
+            exit(0);
+            default:
+            printf("invalid");
+        }
+    }
+    return 0;
+    
+}
